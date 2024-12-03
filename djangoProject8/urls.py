@@ -22,6 +22,7 @@ from capital import views
 urlpatterns = [
     path('', views.home, name='home'),
     path('view_stock/stock', views.view_stock, name='view_stock'),
+
     path('stocks/delete/<int:stocks_id>', views.delete_product, name='delete_product'),
     path('admin/', admin.site.urls),
 ]

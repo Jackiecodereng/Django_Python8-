@@ -39,3 +39,5 @@ def home(request):
         # No data needed for the home page (optional)
         context = {}
         return render(request, 'home.html', context)
+
+
