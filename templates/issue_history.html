@@ -1,0 +1,49 @@
+{% extends 'master.html' %}
+
+{% block title %}
+    <title>Products</title>
+{% endblock %}
+
+
+{% block content %}
+    <style>
+    body{
+        background-color: rgba(255, 255, 255, 0.87);
+        background-size: cover;
+        background-position: center;
+         width: 100%;
+    }
+    </style>
+	<div class="container">
+    <h2>Grocery Products</h2>
+    <table class="table table-hover">
+        <tr>
+            <th>Product</th>
+            <th>Initial Quantity</th>
+            <th> Current Quantity</th>
+            <th> Amount</th>
+            <th> Customer</th>
+            <th>Sold By</th>
+            <th>Date</th>
+            
+        </tr>
+        {% for purchase in purchase_data %}
+                <tr>
+                    <td>{{ purchase.stocks.product }}</td>
+                    <td>{{ purchase.stocks.initial_quantity }}</td>
+                    <td>{{ purchase.stocks.quantity }}</td>
+                    <td>{{ purchase.amount }}</td>
+                    <td>{{ purchase.bought_by }}</td>
+                    <td>{{ purchase.sold_by }}</td>
+                   <td>{{ purchase.created_at}}</td>
+                    
+                </tr>
+        {% endfor %}
+        	
+    
+        
+    </table>
+       
+</div>
+
+{% endblock %}

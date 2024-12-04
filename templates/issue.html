@@ -1,0 +1,40 @@
+{% extends 'master.html' %}
+{% load static %}
+{% load crispy_forms_filters %}
+
+
+{% block title %}
+	<title>Items Bought</title>
+{% endblock %}
+
+
+{% block content %}
+     <style>
+    body{
+        background-color: rgba(74, 50, 122, 0.35);
+        background-size: cover;
+        background-position: center;
+         width: 100%;
+    }
+    </style>
+	<div class="container">
+     <div class=" row justify-content-center">
+         <div class="col-sm-6  px-3 offset-md-4 ">
+             <img src="{% static 'fam2.png' %}" alt="">
+         </div>
+     </div>
+   <div class="row justify-content-center">
+       <div class="col-sm-6 border px-6 py-6 mt-3"> {% comment %}px-3 is padding to the x axis py-3 is padding to y axis{% endcomment %}
+           {% comment %} use django classes post for secured data and get does not make data secured{% endcomment %}
+           <h3>Product: {{ stocks.product }} </h3>
+           <p>Price: {{ stocks.price }}</p>
+           <p>Current Quantity: {{ stocks.quantity }}</p>
+           <form action="{% url 'issue' stocks.id %}" method="post">
+               {% csrf_token %}
+               {{ form | crispy }}
+               <button class="btn btn-info w-100">Quantity Bought</button>
+           </form>
+       </div>
+   </div>
+    </div>
+{% endblock %}

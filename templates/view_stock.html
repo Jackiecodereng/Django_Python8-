@@ -8,7 +8,7 @@
 {% block content %}
     <style>
     body{
-        background-color: rgba(74, 50, 122, 0.35);
+        background-color: rgba(255, 255, 255, 0.87);
         background-size: cover;
         background-position: center;
          width: 100%;
@@ -21,22 +21,27 @@
             <th>ID</th>
             <th>Product</th>
             <th>Product ID</th>
-            <th>Quantity</th>
             <th>Price</th>
+            <th>Initial Quantity</th>
+            <th>Quantity</th>
             <th>Date</th>
             <th>Delete</th>
-            
+             <th>Issue</th>
         </tr>
-        {% for stocks in whiskey %}
+        {% for stocks in whiskey.object_list %}
             <tr>
                 <td>{{ stocks.id }}</td>
                 <td>{{ stocks.product }}</td>
                 <td>{{ stocks.product_id }}</td>
-                <td>{{ stocks.quantity }}</td>
                 <td>{{ stocks.price }}</td>
+                <td>{{ stocks.initial_quantity }}</td>
+                <td>{{ stocks.quantity }}</td>
                <td>{{ stocks.date }}</td>
                 <td>
                     <a  class= "btn btn-light text-danger " href="{% url 'delete_product' stocks.id %}">X</a>
+                </td>
+            <td>
+                    <a  class= "btn btn-light text-primary " href="{% url 'issue' stocks.id %}">Issue</a>
                 </td>
             </tr>
         	
@@ -45,6 +50,19 @@
         {% endfor %}
         
     </table>
+       <div class="row justify-content-center">
+            <div class="col-sm-2">
+                {% if whiskey.has_previous %}
+                    <a class="btn btn-outline-info btn-sm" href="?page={{ whiskey.previous_page_number }}"> << </a>
+
+                {% endif %}
+                <span class="mx-3">{{ whiskey.number }}</span>
+                {% if whiskey.has_next %}
+                    <a class="btn btn-outline-info btn-sm" href="?page={{ whiskey.next_page_number }}"> >> </a>
+                {% endif %}
+
+            </div>
+        </div>
 </div>
 
 {% endblock %}
