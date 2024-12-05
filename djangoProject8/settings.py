@@ -147,5 +147,4 @@ LOGIN_URL = 'login'
 
 
 #password123456
-#email admin@gmail.com
-#username :jackie
+#email admin2@gmail.com

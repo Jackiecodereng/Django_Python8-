@@ -16,8 +16,9 @@
     </style>
 	<div class="container">
     <h2>Grocery Products</h2>
-    <table class="table table-hover">
+    <table class="table table-sm">
         <tr>
+            <th> ID</th>
             <th>Product</th>
             <th>Initial Quantity</th>
             <th> Current Quantity</th>
@@ -25,10 +26,12 @@
             <th> Customer</th>
             <th>Sold By</th>
             <th>Date</th>
+            <th>Delete</th>
             
         </tr>
         {% for purchase in purchase_data %}
                 <tr>
+                    <td>{{ purchase.id }}</td>
                     <td>{{ purchase.stocks.product }}</td>
                     <td>{{ purchase.stocks.initial_quantity }}</td>
                     <td>{{ purchase.stocks.quantity }}</td>
@@ -36,7 +39,9 @@
                     <td>{{ purchase.bought_by }}</td>
                     <td>{{ purchase.sold_by }}</td>
                    <td>{{ purchase.created_at}}</td>
-                    
+                     <td>
+                    <a  class= "btn btn-light text-danger " href="{% url 'delete_purchase' purchase.id %}">X</a>
+                </td>
                 </tr>
         {% endfor %}
         	

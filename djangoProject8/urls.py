@@ -29,5 +29,7 @@ urlpatterns = [
     path('logout', views.signout_user, name='logout'),
 
     path('stocks/delete/<int:stocks_id>', views.delete_product, name='delete_product'),
+    path('stock/search', views.search_product, name='search_product'),
+    path('purchase/delete/<int:purchase_id>', views.delete_purchase, name='delete_purchase'),
     path('admin/', admin.site.urls),
 ]

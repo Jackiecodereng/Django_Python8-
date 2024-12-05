@@ -33,6 +33,8 @@ class Purchase(models.Model):
         return f"{self.stocks.product} -{self.amount}"
 
 
+
+
     class Meta:
         db_table = 'lemon'
 class Returned(models.Model):
