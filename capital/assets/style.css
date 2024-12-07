@@ -1,21 +1,5 @@
-
-.hero{
-    background-image: url('ps9.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    position:relative; /*to adjust an element's position without affecting the layout of surrounding elements and to serve as a reference for absolutely positioned child elements.*/
-    z-index:2; /*Use z-index to control the stacking order of overlapping elements, ensuring that elements with higher z-index values are displayed on top of those with lower values.*/
-}
-/*placing an overlay over image*/
-.hero::after{
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    background-color: rgba(21, 20, 51, 0.8);
-    z-index: -1;
-}
+ .navbar-brand {
+        font-weight: 900;
+        font-size: 25px;
+        color: rgba(153, 114, 225, 0.56);
+ }

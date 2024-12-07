@@ -7,50 +7,47 @@
 
 {% block content %}
     <style>
-    body{
-        background-color: rgba(255, 255, 255, 0.87);
-        background-size: cover;
-        background-position: center;
-         width: 100%;
-    }
+        body {
+            background-color: rgba(255, 255, 255, 0.87);
+            background-size: cover;
+            background-position: center;
+            width: 100%;
+        }
     </style>
-	<div class="container">
-    <h2>Search Product</h2>
-    <table class="table table-hover">
-        <tr>
-            <th>ID</th>
-            <th>Product</th>
-            <th>Product ID</th>
-            <th>Price</th>
-            <th>Initial Quantity</th>
-            <th>Quantity</th>
-            <th>Date</th>
-            <th>Delete</th>
-             <th>Issue</th>
-        </tr>
-        {% for stocks in whiskey.object_list %}
+    <div class="container">
+        <h2>Search Product</h2>
+        <table class="table table-hover">
             <tr>
-                <td>{{ stocks.id }}</td>
-                <td>{{ stocks.product }}</td>
-                <td>{{ stocks.product_id }}</td>
-                <td>{{ stocks.price }}</td>
-                <td>{{ stocks.initial_quantity }}</td>
-                <td>{{ stocks.quantity }}</td>
-               <td>{{ stocks.date }}</td>
-                <td>
-                    <a  class= "btn btn-light text-danger " href="{% url 'delete_product' stocks.id %}">X</a>
-                </td>
-            <td>
-                    <a  class= "btn btn-light text-primary " href="{% url 'issue' stocks.id %}">Issue</a>
-                </td>
+                <th>ID</th>
+                <th>Product</th>
+                <th>Product ID</th>
+                <th>Price</th>
+                <th>Initial Quantity</th>
+                <th>Quantity</th>
+                <th>Date</th>
+                <th>Issue</th>
             </tr>
-        	
-        {% empty %}
-        	<p>No products in the database</p>
-        {% endfor %}
-        
-    </table>
-       <div class="row justify-content-center">
+            {% for stocks in whiskey.object_list %}
+                <tr>
+                    <td>{{ stocks.id }}</td>
+                    <td>{{ stocks.product }}</td>
+                    <td>{{ stocks.product_id }}</td>
+                    <td>{{ stocks.price }}</td>
+                    <td>{{ stocks.initial_quantity }}</td>
+                    <td>{{ stocks.quantity }}</td>
+                    <td>{{ stocks.date }}</td>
+
+                    <td>
+                        <a class="btn btn-light text-primary " href="{% url 'issue' stocks.id %}">Issue</a>
+                    </td>
+                </tr>
+
+            {% empty %}
+                <p>No products in the database</p>
+            {% endfor %}
+
+        </table>
+        <div class="row justify-content-center">
             <div class="col-sm-2">
                 {% if whiskey.has_previous %}
                     <a class="btn btn-outline-info btn-sm" href="?page={{ whiskey.previous_page_number }}"> << </a>
@@ -63,6 +60,6 @@
 
             </div>
         </div>
-</div>
+    </div>
 
 {% endblock %}

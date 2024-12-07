@@ -4,8 +4,8 @@ from django.db.models import Q
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-from capital.app_forms import StockForm, PurchaseForm, LoginForm
-from capital.models import Stock, Purchase
+from capital.app_forms import StockForm, PurchaseForm, LoginForm, ReturnedForm
+from capital.models import Stock, Purchase, Returned
 from django.shortcuts import render, redirect, get_object_or_404
 
 
@@ -81,6 +81,9 @@ def issue(request, stocks_id):
         form = PurchaseForm(request.POST)
         if form.is_valid():
             quantity_bought = form.cleaned_data['quantity_bought']
+            if quantity_bought > stocks.quantity:
+                messages.warning(request, message="Not enough products in store")
+                return redirect('view_stock')
             bought_by = form.cleaned_data['bought_by']
             sold_by = form.cleaned_data['sold_by']
             stocks.quantity = stocks.quantity - int(quantity_bought)
@@ -93,6 +96,7 @@ def issue(request, stocks_id):
                              f'You have successfully bought  {quantity_bought}  {stocks.product} and the total amount is {amount}.')
 
             return redirect('view_stock')
+
     else:
         form = PurchaseForm()
     return render(request, template_name='issue.html', context={"form": form, "stocks": stocks}, )
@@ -154,3 +158,32 @@ def search_product(request):
     except (PageNotAnInteger, EmptyPage):
         paginated_data = paginator.page(1)
     return render(request, "search.html", context={"whiskey": paginated_data,"query": query})
+
+
+def product_details(request, stocks_id):
+    stocks = get_object_or_404(Stock, id=stocks_id)
+
+    # Retrieve all purchase transactions associated with this stock item
+    purchase = Purchase.objects.filter(stocks_id=stocks_id)
+
+    # Pass the data to the template
+    return render(request, 'meta.html', {
+        'purchase': purchase,
+        'stocks':stocks,})
+
+
+def return_product(request, stocks_id):
+        returned_item = get_object_or_404(Returned, id=stocks_id)
+        product = returned_item.product  # Assuming a product field in Returned
+
+        if request.method == "POST":
+            # Update stock quantity (assuming a quantity field in Stock)
+            stock = Stock.objects.get(product=product)
+            stock.quantity = stock.quantity + 1  # Increment stock quantity
+            stock.save()
+
+            messages.success(request, message=f"Successfully returned {product}")
+            return redirect('view_returned')  # Redirect to returned product list
+
+        return render(request, template_name='return_product.html', context={"returned_item": returned_item})
+

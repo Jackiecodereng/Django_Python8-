@@ -4,7 +4,7 @@
 
 
 {% block title %}
-    <title>Items Bought</title>
+    <title>Return Product</title>
 {% endblock %}
 
 
@@ -29,10 +29,10 @@
                 <h3>Product: {{ stocks.product }} </h3>
                 <p>Price: {{ stocks.price }}</p>
                 <p>Current Quantity: {{ stocks.quantity }}</p>
-                <form action="{% url 'issue' stocks.id %}" method="post">
+                <form action="{% url 'return_product' stocks.id %}" method="post">
                     {% csrf_token %}
                     {{ form | crispy }}
-                    <button class="btn btn-info w-100">Request Pay</button>
+                    <button class="btn btn-info w-100">Return</button>
                 </form>
             </div>
         </div>

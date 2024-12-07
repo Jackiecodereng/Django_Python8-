@@ -30,7 +30,7 @@ class LoginForm(forms.Form):
 class ReturnedForm(forms.ModelForm):
     class Meta:
         model = Returned
-        fields = ['returned_date','returned_by']
+        fields = ['product','returned_date','returned_by']
 
 
 

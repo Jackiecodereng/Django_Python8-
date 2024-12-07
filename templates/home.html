@@ -1,50 +1,221 @@
 {% extends 'master.html' %}
 {% load static %}
-<link rel="stylesheet" href="{% static 'style.css' %}">
 {% block title %}
-	
+
+{% endblock %}
+{% block extra_css %}
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
+          integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"
+          integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
 {% endblock %}
 
 {% block content %}
     <style>
-    .hero{
-    background-image: url("static/ps9.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    position:relative; /*to adjust an element's position without affecting the layout of surrounding elements and to serve as a reference for absolutely positioned child elements.*/
-    z-index:2; /*Use z-index to control the stacking order of overlapping elements, ensuring that elements with higher z-index values are displayed on top of those with lower values.*/
-}
-/*placing an overlay over image*/
-.hero::after{
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    background-color: rgba(21, 20, 51, 0.8);
-    z-index: -1;
-}
+        :root {
+            --primary: #0d6efd;
+            --dark: #21252f;
+            --body: #888;
+            --moz-box-shadow: 0 8px 22px 0 rgba(0, 0, 0, 0.1);
+        }
+
+        .hero {
+            background-image: url("static/ps9.jpg");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            position: relative; /*to adjust an element's position without affecting the layout of surrounding elements and to serve as a reference for absolutely positioned child elements.*/
+            z-index: 2; /*Use z-index to control the stacking order of overlapping elements, ensuring that elements with higher z-index values are displayed on top of those with lower values.*/
+        }
+
+        /*placing an overlay over image*/
+        .hero::after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background-color: rgba(21, 20, 51, 0.8);
+            z-index: -1;
+        }
+
+        .card-effect {
+            box-shadow: var(--moz-box-shadow);
+            background-color: white;
+            padding: 25px;
+            transition: 0.35s;
+        }
+
+        .card-effect:hover {
+            box-shadow: none;
+            transform: translateY(5px); /* is used to move an element vertically along the Y-axis by 5 pixels. In this case, it moves the element downward by 5 pixels. */
+        }
+
+        .icon_box {
+            width: 54px;
+            height: 54px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--primary);
+            color: white;
+            font-size: 32px;
+            border-radius: 100px; /* which is same as 50%*/
+            flex: none; /*doesnt shrink or expand the icon*/
+        }
+
+        .service {
+            position: relative;
+            z-index: 2;
+            overflow: hidden;
+
+        }
+
+        .service::after {
+            content: "";
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: -100%;
+            left: 0;
+            background-color: var(--primary);
+            z-index: -1;
+            opacity: 0;
+            transition: all 0.4s;
+        }
+
+        .service:hover h5,
+        .service:hover p {
+            color: white;
+        }
+
+        .service:hover .icon_box {
+            background-color: white;
+            color: var(--primary);
+        }
+
+        /* the after effrect*/
+        .service:hover::after {
+            opacity: 1;
+            top: 0;
+        }
+
+
     </style>
-	<div class="hero vh-100 d-flex align-items-center" id="home">
-    <!-- vh100 gives the hero section to occupy a height of 100 while dflex give it a flex moves it to one side and align items center ensures item is a the center considering height -->
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-7 mx-auto text-center">
-                <!-- the class mx auto now centres the div based on width while text-center centers based on the div-->
-                <h1 class="display-4 text-white"> CELESTIALS <br>Leave the hustle to us</h1>
-                <!-- the display4 makes the h1 text larger-->
-                <p class="text-white my-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur culpa
-                    dignissimos minus nam, non rem! Aspernatur at doloribus quibusdam, rerum sapiente temporibus velit
-                    voluptate? A aperiam architecto maiores quo ullam.</p>
-                <a href="{% url 'view_stock' %}" class="btn me-2 btn-primary">View Products</a>
-                <!-- me-2 gives a left space for the two buttons primary is the colour of the button-->
-                <a href="{% url 'add_stock' %}" class="btn btn-outline-light">Add Products</a>
-                <!-- the btn-outline_light makes the button have bright color-->
+    <div class="hero vh-100 d-flex align-items-center" id="home">
+        <!-- vh100 gives the hero section to occupy a height of 100 while dflex give it a flex moves it to one side and align items center ensures item is a the center considering height -->
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-7 mx-auto text-center">
+                    <!-- the class mx auto now centres the div based on width while text-center centers based on the div-->
+                    <h1 class="display-4 text-white"> CELESTIALS <br>Leave the hustle to us</h1>
+                    <!-- the display4 makes the h1 text larger-->
+                    <p class="text-white my-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur
+                        culpa
+                        dignissimos minus nam, non rem! Aspernatur at doloribus quibusdam, rerum sapiente temporibus
+                        velit
+                        voluptate? A aperiam architecto maiores quo ullam.</p>
+                    <a href="{% url 'view_stock' %}" class="btn me-2 btn-primary">View Products</a>
+                    <!-- me-2 gives a left space for the two buttons primary is the colour of the button-->
+                    <a href="{% url 'add_stock' %}" class="btn btn-outline-light">Add Products</a>
+                    <!-- the btn-outline_light makes the button have bright color-->
+                </div>
             </div>
         </div>
     </div>
-</div>
+    <section id="services">
+        <div class="container">
+            <div class="row g-4"> <!-- gives a vertical space of 4 between the intro p and boxes -->
+                <div class="col-md-8 mx-auto text-center">
+                    <h6 class="text-primary">Services</h6>
+                    <h1>Our Services</h1>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid aspernatur distinctio,
+                        doloribus
+                        eos est harum ipsam, laborum natus nesciunt nobis nostrum nulla officia optio possimus voluptas?
+                        Beatae debitis ut vel.</p>
+                </div>
+
+                <div class="row ">
+                    <div class="col-lg-4 col-sm-6">
+                        <div class="service card-effect">
+                            <div class="icon_box">
+                                <i class='bx bxs-cat'></i>
+                            </div>
+                            <h5 class="mt-4 mb-2">Sales tracking</h5>
+                            <!-- the class mt-4 gives a space between the icon and h5 mb-2 is margin bottom and gives space between p and div-->
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium, alias aliquid
+                                aperiam
+                                deleniti dolores earum eos est i</p>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-6">
+                        <div class="service card-effect">
+                            <div class="icon_box">
+                                <i class='bx bxs-happy'></i>
+                            </div>
+                            <h5 class="mt-4 mb-2">Payment Processing</h5>
+                            <!-- the class mt-4 gives a space between the icon and h5 mb-2 is margin bottom and gives space between p and div-->
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium, alias aliquid
+                                aperiam
+                                deleniti dolores earum eos est i</p>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-6">
+                        <div class="service card-effect">
+                            <div class="icon_box">
+                                <i class='bx bxs-parking'></i>
+                            </div>
+                            <h5 class="mt-4 mb-2">Inventory Control</h5>
+                            <!-- the class mt-4 gives a space between the icon and h5 mb-2 is margin bottom and gives space between p and div-->
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium, alias aliquid
+                                aperiam
+                                deleniti dolores earum eos est i</p>
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </section>
+    <footer>
+
+
+        <div class="footer-bottom gy-3">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 ">
+                        @2024 copyright all right reserved
+                    </div>
+                    <div class="col-md-6">
+                        <div class="social-links ">
+
+                            <a href="#"><i class='bx bxl-whatsapp'></i></a>
+                            <a href="#"><i class='bx bxl-gmail'></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+{% endblock %}
+{% block extra-js %}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.js"
+            integrity="sha512-gY25nC63ddE0LcLPhxUJGFxa2GoIyA5FLym4UJqHDEMHjp8RET6Zn/SHo1sltt3WuVtqfyxECP38/daUc/WVEA=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 {% endblock %}
