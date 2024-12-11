@@ -1,5 +1,8 @@
 Stock Management System
 Empower your small business with data-driven decisions.it provides a powerful inventory management solution that helps you track stock, analyze sales trends, and make informed choices to boost your bottom line.
+**LOGIN PAGE**
+![image](https://github.com/user-attachments/assets/59de1b2f-7144-42b9-8773-733025cfa354)
+
 **HOME PAGE**
 ![page1](https://github.com/user-attachments/assets/6d50dbf3-f1d3-4778-888b-ef3812e0e09a)
 ![page2](https://github.com/user-attachments/assets/47884fe2-87be-429e-a0ff-68f0c779f4f1)
