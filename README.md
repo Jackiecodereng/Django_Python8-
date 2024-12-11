@@ -12,8 +12,9 @@ Helps clients to add a quantity to astock and also view it.
 ![page5](https://github.com/user-attachments/assets/4439a63c-1d2b-43f9-be4d-a87acda2071f)
 **ADD STOCK**
 ![page6](https://github.com/user-attachments/assets/c3125235-ded0-45a8-8e47-a108b811095a)
-![page7](https://github.com/user-attachments/assets/170f51b4-10bc-4ee9-958f-350743d0a319)
 **VIEW HISTORY**
+![page7](https://github.com/user-attachments/assets/170f51b4-10bc-4ee9-958f-350743d0a319)
+**VIEW PRODUCT DETAILS**
 ![page9](https://github.com/user-attachments/assets/8af1416c-d4e1-4205-a0da-9053365cf40a)
 
 
